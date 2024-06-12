@@ -1,0 +1,22 @@
+<h3>Angular sampler</h3>
+<div>
+    <form (ngSubmit)="addWorkExperience()">
+        <label for="startDate">Start Date:</label>
+        <input id="startDate" type="month" [(ngModel)]="newWorkExperience.startDate" name="startDate" required [min]="dateMin" [max]="dateMax" />
+
+        <label for="endDate">End Date:</label>
+        <input id="endDate" type="month" [(ngModel)]="newWorkExperience.endDate" name="endDate" [disabled]="newWorkExperience.isCurrentJob" [min]="dateMin" [max]="dateMax" />
+
+        <label for="isCurrentJob">Current Job:</label>
+        <input id="isCurrentJob" type="checkbox" [(ngModel)]="newWorkExperience.isCurrentJob" name="isCurrentJob" (change)="newWorkExperience.endDate = null" />
+
+        <button type="submit">Add Work Experience</button>
+    </form>
+
+    <ul>
+        <li *ngFor="let experience of workExperiences">
+            {{ experience.startDate | date: 'yyyy-MM' }} -
+            {{ experience.isCurrentJob ? 'Present' : (experience.endDate | date: 'yyyy-MM') }}
+        </li>
+    </ul>
+</div>
